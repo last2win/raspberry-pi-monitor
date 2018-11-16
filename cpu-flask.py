@@ -19,12 +19,12 @@ def get():
 
 
 @app.route('/', methods=['GET'])
-def hello_world():
+def main():
     get()
     return render_template('index.html', data=temperature)
 
 @app.route('/cpu', methods=['GET'])
-def hello_world():
+def cpu():
     get()
     return render_template('cpu.html')
 
