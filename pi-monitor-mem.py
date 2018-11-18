@@ -22,10 +22,10 @@ def get_mem():
     try:
         MemTotal = os.popen(
             "cat /proc/meminfo | grep MemTotal |awk  '{print $2 / 1024}'").readline()
-        MemTotal=float(MemTotal)
-        MemAvailable=os.popen(
-        "cat /proc/meminfo | grep MemAvailable |awk  '{print $2 / 1024}'").readline()
-        MemAvailable=float(MemAvailable)
+        MemTotal = float(MemTotal)
+        MemAvailable = os.popen(
+            "cat /proc/meminfo | grep MemAvailable |awk  '{print $2 / 1024}'").readline()
+        MemAvailable = float(MemAvailable)
         return MemAvailable
     except Exception as e:
         print(e)
@@ -37,7 +37,7 @@ def save(mem):
     command1 = "insert into mem \
              (mem,time) values (?,?);"
     try:
-        temp = ( mem[-1], int(round(time.time() * 1000)))
+        temp = (mem, int(round(time.time() * 1000)))
         conn.execute(command1, temp)
     except Exception as e:
         print(e)
@@ -55,12 +55,11 @@ def get():
             mem.append(j)
 
 
-
 def main():
     global conn
     conn = None
     create()
-    mem=get_mem()
+    mem = get_mem()
     save(mem)
     print("now time is", time.asctime(time.localtime(time.time())),
           "and free memory is", mem, "M")

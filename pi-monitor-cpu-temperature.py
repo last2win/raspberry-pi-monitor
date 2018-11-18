@@ -54,7 +54,7 @@ def main():
     temperature = get_temperature()
     save(temperature)
     print("now time is", time.asctime(time.localtime(time.time())),
-          "and cpu temperature is", temperature/1000, "degrees Celsius")
+          "and cpu temperature is", int(temperature)/1000, "degrees Celsius")
 
 
 if __name__ == '__main__':
