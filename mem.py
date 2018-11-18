@@ -56,6 +56,7 @@ def get():
             mem.append(j)
 
 
+
 def main():
     global conn, mem, ID
     mem = []

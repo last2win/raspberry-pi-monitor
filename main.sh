@@ -9,12 +9,5 @@ then
 fi
 python3 cpu-temperature.py &
 python3 cpu-flask.py &
+python3 mem.py &
 wait
-:<<!
-while [[ 1==1 ]]; do
-    python3 cpu-temperature.py 
-    wait
-    sleep 60
-    #statements
-done
-!
