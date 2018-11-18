@@ -18,11 +18,7 @@ def create():
 
 
 def get_mem():
-    global MemTotal
     try:
-        MemTotal = os.popen(
-            "cat /proc/meminfo | grep MemTotal |awk  '{print $2 / 1024}'").readline()
-        MemTotal = float(MemTotal)
         MemAvailable = os.popen(
             "cat /proc/meminfo | grep MemAvailable |awk  '{print $2 / 1024}'").readline()
         MemAvailable = float(MemAvailable)
@@ -45,14 +41,6 @@ def save(mem):
         conn.rollback()
     conn.commit()
 
-
-def get():
-    global conn, mem
-    temp = conn.execute(
-        "select mem from mem  ;").fetchall()
-    for i in temp:
-        for j in i:
-            mem.append(j)
 
 
 def main():

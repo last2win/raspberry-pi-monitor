@@ -3,7 +3,9 @@ import time
 import datetime
 import sqlite3
 import os
+
 conn=None
+
 def connect():
     global conn
     conn = sqlite3.connect('data.db')
@@ -18,6 +20,7 @@ def cpu_get():
         for j in i:
             temperature.append(j/1000)
     return temperature
+
 def mem_get():
     global conn
     connect()
@@ -46,7 +49,6 @@ def cpu():
     plt.xlabel("time", fontsize=15)
     plt.ylabel("cpu temperature", fontsize=15)
     plt.plot(x, temperature)
- #       plt.plot(x[::ID//10], temperature[::ID//10])
     plt.ylim(20 if 20 < min(temperature) else min(temperature),
              100 if 100 > max(temperature) else max(temperature))
     plt.gcf().autofmt_xdate()
@@ -65,7 +67,7 @@ def mem():
          for i in range(ID)]
     plt.title("time and memory usage", fontsize=25)
     plt.xlabel("time", fontsize=15)
-    plt.ylabel("内存使用情况", fontsize=15)
+    plt.ylabel("memory usage", fontsize=15)
     plt.plot(x, mem)
     plt.ylim(0,MemTotal)
     plt.gcf().autofmt_xdate()

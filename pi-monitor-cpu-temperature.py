@@ -5,7 +5,6 @@ Created on Fri Sep 14 09:12:16 2018
 @author: peter
 """
 import time
-import datetime
 import sqlite3
 
 
