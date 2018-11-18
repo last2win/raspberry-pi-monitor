@@ -31,15 +31,14 @@ def get_mem():
         print(e)
 
 
-def save():
+def save(mem):
     # 将数据保存至本地
-    global conn, mem, ID
+    global conn
     command1 = "insert into mem \
-             (id,mem,time) values (?,?,?);"
+             (mem,time) values (?,?);"
     try:
-        temp = (ID, mem[-1], int(round(time.time() * 1000)))
+        temp = ( mem[-1], int(round(time.time() * 1000)))
         conn.execute(command1, temp)
-#        print("save success!")
     except Exception as e:
         print(e)
         print("insert error!")
@@ -48,7 +47,7 @@ def save():
 
 
 def get():
-    global conn, mem, ID
+    global conn, mem
     temp = conn.execute(
         "select mem from mem  ;").fetchall()
     for i in temp:
@@ -58,17 +57,13 @@ def get():
 
 
 def main():
-    global conn, mem, ID
-    mem = []
+    global conn
     conn = None
-    ID = 0
     create()
-    get()
-    mem.append(get_mem())
-    ID = len(mem)
-    save()
+    mem=get_mem()
+    save(mem)
     print("now time is", time.asctime(time.localtime(time.time())),
-          "and free memory is", mem[-1], "M")
+          "and free memory is", mem, "M")
 
 
 if __name__ == '__main__':
