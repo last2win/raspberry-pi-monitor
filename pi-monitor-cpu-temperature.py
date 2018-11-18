@@ -36,7 +36,7 @@ def save(temperature):
     # 将数据保存至本地
     global conn
     command1 = "insert into temperature \
-             (temperature,time) values (?,?,?);"
+             (temperature,time) values (?,?);"
     try:
         temp = (temperature, int(round(time.time() * 1000)))
         conn.execute(command1, temp)
