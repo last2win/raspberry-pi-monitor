@@ -36,11 +36,11 @@ def get_temperature():
 
 def save():
     # 将数据保存至本地
-    global conn, temperature, ID
+    global conn, temperature
     command1 = "insert into temperature \
-             (id,temperature,time) values (?,?,?);"
+             (temperature,time) values (?,?,?);"
     try:
-        temp = (ID, temperature[-1], int(round(time.time() * 1000)))
+        temp = ( temperature, int(round(time.time() * 1000)))
         conn.execute(command1, temp)
 #        print("save success!")
     except Exception as e:
@@ -50,49 +50,20 @@ def save():
     conn.commit()
 
 
-def get():
-    global conn, temperature, ID
-    temp = conn.execute(
-        "select temperature from temperature  ;").fetchall()
-    for i in temp:
-        for j in i:
-            temperature.append(j/1000)
 
 
-def draw():
-    global ID, temperature
-    import matplotlib
-    matplotlib.use('Agg')
-    import matplotlib.pyplot as plt
-    past = datetime.datetime.now()-datetime.timedelta(minutes=ID)
-    x = [past+datetime.timedelta(minutes=i)
-         for i in range(ID)]
-    plt.title("time and cpu temperature", fontsize=25)
-    plt.xlabel("time", fontsize=15)
-    plt.ylabel("cpu temperature", fontsize=15)
-    plt.plot(x, temperature)
- #       plt.plot(x[::ID//10], temperature[::ID//10])
-    plt.ylim(20 if 20 < min(temperature) else min(temperature),
-             100 if 100 > max(temperature) else max(temperature))
-    plt.gcf().autofmt_xdate()
-    plt.savefig('static/temperature.jpg')
+
+
 
 
 def main():
-    global conn, temperature, ID
-    temperature = []
+    global conn
     conn = None
-    ID = 0
     create()
-    get()
-    temperature.append(get_temperature())
-    ID = len(temperature)
+    temperature=get_temperature()
     save()
-    temperature[-1] = int(temperature[-1])/1000
     print("now time is", time.asctime(time.localtime(time.time())),
-          "and cpu temperature is", temperature[-1],"℃")
-    draw()
-#    print(x[-1])
+          "and cpu temperature is", temperature,"℃")
 
 
 if __name__ == '__main__':

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import time
+import draw
 import datetime
 import sqlite3
 from flask import Flask, render_template, url_for
@@ -30,12 +31,13 @@ def main():
 
 @app.route('/mem', methods=['GET'])
 def memory():
+    draw.mem()
     return render_template('mem.html')
 
 
 @app.route('/cpu', methods=['GET'])
 def cpu():
-    get()
+    draw.cpu()
     return render_template('cpu.html')
 
 
