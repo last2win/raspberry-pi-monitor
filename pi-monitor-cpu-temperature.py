@@ -32,15 +32,14 @@ def get_temperature():
         cpu_temp_file.close()
 
 
-def save():
+def save(temperature):
     # 将数据保存至本地
-    global conn, temperature
+    global conn
     command1 = "insert into temperature \
              (temperature,time) values (?,?,?);"
     try:
         temp = (temperature, int(round(time.time() * 1000)))
         conn.execute(command1, temp)
-#        print("save success!")
     except Exception as e:
         print(e)
         print("insert error!")
@@ -53,7 +52,7 @@ def main():
     conn = None
     create()
     temperature = get_temperature()
-    save()
+    save(temperature)
     print("now time is", time.asctime(time.localtime(time.time())),
           "and cpu temperature is", temperature, "℃")
 
