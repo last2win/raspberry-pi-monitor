@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <script type="text/javascript">
-    window.onload = function() {
-        var chart = new CanvasJS.Chart("chartContainer", {
+        function cpu(){
+            var chart = new CanvasJS.Chart("cpuchart", {
             theme: "light2", // "light1", "light2", "dark1", "dark2"
             animationEnabled: true,
             zoomEnabled: true,
@@ -23,8 +23,7 @@
                 type: "area",
                 xValueType: "dateTime",
                 dataPoints: [ //array
-                {% for i in data%}
- //               <p>{{i[0]}}----{{i[1]}}</p>
+                {% for i in temperature%}
                 {{"{x:"}}{{i[1]}}{{",y:"}}{{i[0]/1000}}{{"},"}}
                 {% endfor %}
                
@@ -33,15 +32,48 @@
         });
 
         chart.render();
+        }
+         function mem(){
+            var chart = new CanvasJS.Chart("memchart", {
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            animationEnabled: true,
+            zoomEnabled: true,
+            title: {
+                text: "内存使用情况图"
+            },
+            axisX: {
+                title: "timeline",
+                gridThickness: 2
+            },
+            axisY: {
+                title: "内存使用"
+            },
+            data: [{
+                type: "area",
+                xValueType: "dateTime",
+                dataPoints: [ //array
+                {% for i in mem%}
+ //               <p>{{i[0]}}----{{i[1]}}</p>
+                {{"{x:"}}{{i[1]}}{{",y:"}}{{i[0]}}{{"},"}}
+                {% endfor %}
+               
+                ]
+            }]
+        });
+
+        chart.render();
+        }
+    window.onload = function() {
+        cpu();
+        mem();
     }
     </script>
     <script type="text/javascript" src="{{url_for('static', filename='canvasjs.min.js')}}"></script>
 </head>
 
 <body>
-    <div id="chartContainer" style="height: 300px; width: 100%;">
-    </div>
-   
+    <div id="cpuchart" style="height: 300px; width: 100%;"></div>
+   <div id="memchart" style="height: 300px; width: 100%;"></div>
 </body>
 
 </html>

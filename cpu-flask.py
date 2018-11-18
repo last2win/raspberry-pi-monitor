@@ -5,28 +5,31 @@ import sqlite3
 from flask import Flask, render_template, url_for
 from datetime import timedelta
 conn = None
-temperature = []
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = timedelta(
     seconds=60)  # 设置图片的缓存时间为1分钟
 
 
-def get():
-    global temperature
+def get_temperature():
     conn = sqlite3.connect('data.db')
     temperature = conn.execute(
         "select temperature,time from temperature  ;").fetchall()
-
+    return temperature
+def get_mem():
+    conn = sqlite3.connect('data.db')
+    mem = conn.execute(
+        "select mem,time from mem  ;").fetchall()
+    return mem
 
 @app.route('/', methods=['GET'])
 def main():
-    get()
-    return render_template('index.html', data=temperature)
+    temperature=get_temperature()
+    mem=get_mem()
+    return render_template('index.html', temperature=temperature,mem=mem)
 
 
 @app.route('/mem', methods=['GET'])
-def cpu():
-    get()
+def memory():
     return render_template('mem.html')
 
 
