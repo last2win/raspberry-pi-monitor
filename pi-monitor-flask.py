@@ -5,19 +5,21 @@ from flask import Flask, render_template, url_for
 from datetime import timedelta
 import os
 
-conn = None
+
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = timedelta(
     seconds=60)  # 设置图片的缓存时间为1分钟
 
 
 def get_temperature():
+    global conn
     temperature = conn.execute(
         "select temperature,time from temperature  ;").fetchall()
     return temperature
 
 
 def get_mem():
+    global conn
     MemTotal = os.popen(
             "cat /proc/meminfo | grep MemTotal |awk  '{print $2 / 1024}'").readline()
     MemTotal = float(MemTotal)
