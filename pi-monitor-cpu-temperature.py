@@ -9,8 +9,6 @@ import datetime
 import sqlite3
 
 
-
-
 def create():
     # 创建数据库
     global conn
@@ -40,7 +38,7 @@ def save():
     command1 = "insert into temperature \
              (temperature,time) values (?,?,?);"
     try:
-        temp = ( temperature, int(round(time.time() * 1000)))
+        temp = (temperature, int(round(time.time() * 1000)))
         conn.execute(command1, temp)
 #        print("save success!")
     except Exception as e:
@@ -50,20 +48,14 @@ def save():
     conn.commit()
 
 
-
-
-
-
-
-
 def main():
     global conn
     conn = None
     create()
-    temperature=get_temperature()
+    temperature = get_temperature()
     save()
     print("now time is", time.asctime(time.localtime(time.time())),
-          "and cpu temperature is", temperature,"℃")
+          "and cpu temperature is", temperature, "℃")
 
 
 if __name__ == '__main__':
