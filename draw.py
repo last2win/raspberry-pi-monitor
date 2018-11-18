@@ -9,6 +9,7 @@ def connect():
 
 def cpu_get():
     global conn
+    connect()
     temperature=[]
     temp = conn.execute(
         "select temperature from temperature  ;").fetchall()
@@ -16,12 +17,25 @@ def cpu_get():
         for j in i:
             temperature.append(j/1000)
     return temperature
+def mem_get():
+    global conn
+    connect()
+    mem=[]
+    MemTotal = os.popen(
+            "cat /proc/meminfo | grep MemTotal |awk  '{print $2 / 1024}'").readline()
+    MemTotal = float(MemTotal)
+    temp = conn.execute(
+        "select mem from mem  ;").fetchall()
+    for i in temp:
+        for j in i:
+            mem.append(j)
+    return mem,MemTotal
+
 def cpu():
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
     global conn
-    connect()
     temperature = cpu_get()
     ID = len(temperature)
     past = datetime.datetime.now()-datetime.timedelta(minutes=ID)
@@ -38,7 +52,23 @@ def cpu():
     plt.savefig('static/temperature.jpg')
 
 def mem():
-    pass
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    global conn
+    connect()
+    mem,MemTotal = mem_get()
+    ID = len(mem)
+    past = datetime.datetime.now()-datetime.timedelta(minutes=ID)
+    x = [past+datetime.timedelta(minutes=i)
+         for i in range(ID)]
+    plt.title("time and memory usage", fontsize=25)
+    plt.xlabel("time", fontsize=15)
+    plt.ylabel("内存使用情况", fontsize=15)
+    plt.plot(x, mem)
+    plt.ylim(0,MemTotal)
+    plt.gcf().autofmt_xdate()
+    plt.savefig('static/mem.jpg')
 
 def main():
     print("draw shouldn't be use as main")

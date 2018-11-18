@@ -16,17 +16,20 @@ def get_temperature():
     temperature = conn.execute(
         "select temperature,time from temperature  ;").fetchall()
     return temperature
+
+
 def get_mem():
     conn = sqlite3.connect('data.db')
     mem = conn.execute(
         "select mem,time from mem  ;").fetchall()
     return mem
 
+
 @app.route('/', methods=['GET'])
 def main():
-    temperature=get_temperature()
-    mem=get_mem()
-    return render_template('index.html', temperature=temperature,mem=mem)
+    temperature = get_temperature()
+    mem = get_mem()
+    return render_template('index.html', temperature=temperature, mem=mem)
 
 
 @app.route('/mem', methods=['GET'])
