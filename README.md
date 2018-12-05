@@ -1,7 +1,7 @@
 # 树莓派系统监控--CPU温度监控和内存使用情况监控
 ## 系列文章：
 *    文章1：[打造自己的树莓派监控系统1--CPU监控-matplotlib显示数据](https://blog.csdn.net/zhangpeterx/article/details/84071442)      
-*　　文章2：[打造自己的树莓派监控系统2--内存监控-matplotlib显示数据](https://blog.csdn.net/zhangpeterx/article/details/84288281)       
+*    文章2：[打造自己的树莓派监控系统2--内存监控-matplotlib显示数据](https://blog.csdn.net/zhangpeterx/article/details/84288281)       
 *    文章3：[打造自己的树莓派监控系统3--canvas.js绘制数据](https://blog.csdn.net/zhangpeterx/article/details/84819958)         
 ## 准备
 需要安装Python3,Flask,git,screen：
