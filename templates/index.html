@@ -23,7 +23,9 @@
                 type: "area",
                 xValueType: "dateTime",
                 dataPoints: [ //array
-                    { % for i in temperature % } { { "{x:" } } { { i[1] } } { { ",y:" } } { { i[0] / 1000 } } { { "}," } } { % endfor % }
+                    { % for i in temperature % } 
+                    { { "{x:" } } { { i[1] } } { { ",y:" } } { { i[0] / 1000 } } { { "}," } } 
+                    { % endfor % }
 
                 ]
             }]
@@ -52,7 +54,9 @@
                 type: "area",
                 xValueType: "dateTime",
                 dataPoints: [ //array
-                    { % for i in mem % } { { "{x:" } } { { i[1] } } { { ",y:" } } { { i[0] } } { { "}," } } { % endfor % }
+                    { % for i in mem % } 
+                    { { "{x:" } } { { i[1] } } { { ",y:" } } { { i[0] } } { { "}," } } 
+                    { % endfor % }
 
                 ]
             }]
