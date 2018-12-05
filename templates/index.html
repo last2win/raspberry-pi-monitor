@@ -54,7 +54,6 @@
                 xValueType: "dateTime",
                 dataPoints: [ //array
                 {% for i in mem%}
- //               <p>{{i[0]}}----{{i[1]}}</p>
                 {{"{x:"}}{{i[1]}}{{",y:"}}{{i[0]}}{{"},"}}
                 {% endfor %}
                
