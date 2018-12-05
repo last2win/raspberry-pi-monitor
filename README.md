@@ -18,8 +18,8 @@ bash main.sh
 ```
 然后在浏览器中打开[http://127.0.0.1:4000/](http://127.0.0.1:4000/)即可看到树莓派的监控：
 效果如下：    
-![](image.png)  
-
+![](image.png)       
+demo见[demo.html(?加载有点慢)](http://htmlpreview.github.io/?https://github.com/zhang0peter/raspberry-pi-monitor/blob/master/demo.html)      
 
 
 
