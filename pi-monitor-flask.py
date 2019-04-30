@@ -27,7 +27,7 @@ def get_mem():
     return mem, MemTotal
 
 
-@app.route('/', methods=['GET'])
+@app.route('/randomkey', methods=['GET'])
 def main():
     temperature = get_temperature()
     mem, MemTotal = get_mem()
@@ -47,4 +47,6 @@ def cpu():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=4000, debug=True)
+    app.run(host='0.0.0.0', port=4000
+            #      , debug=True
+            )
