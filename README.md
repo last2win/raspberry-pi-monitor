@@ -16,9 +16,8 @@ cd raspberry-pi-monitor/
 screen -S raspberry-pi-monitor
 bash main.sh
 ```
-*注意：如果你的机器在公网上,记得修改参数randomkey为你想要的地址，注意防止别人可以随便猜到*
 
-然后在浏览器中打开[http://127.0.0.1:4000/randomkey](http://127.0.0.1:4000/randomkey)即可看到树莓派的监控：
+然后在浏览器中打开[http://127.0.0.1:4000/](http://127.0.0.1:4000/)即可看到树莓派的监控：
 
 效果如下：    
 ![](image.png)       
